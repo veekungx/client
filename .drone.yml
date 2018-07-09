@@ -24,7 +24,6 @@ pipeline:
     tags:
       - preview
       - "preview-${DRONE_COMMIT_SHA:8}"
-
     when:
       event: pull_request
       
