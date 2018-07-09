@@ -5,7 +5,7 @@ pipeline:
     secrets: [docker_username,docker_password]
     tags:
       - latest
-      - "dev-${DRONE_COMMIT_SHA:8}"
+      - "dev-${DRONE_COMMIT_SHA:0:8}"
     when:
       event: push
       branch: master
@@ -23,7 +23,7 @@ pipeline:
     secrets: [docker_username,docker_password]
     tags:
       - preview
-      - "preview-${DRONE_COMMIT_SHA:8}"
+      - "preview-${DRONE_COMMIT_SHA:0:8}"
     when:
       event: pull_request
       
