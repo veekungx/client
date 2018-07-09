@@ -1,0 +1,61 @@
+pipeline:
+  push-to-docker:
+    image: plugins/docker
+    repo: veekungx/client
+    secrets: [docker_username,docker_password]
+    tags:
+      - latest
+      - "dev-${DRONE_COMMIT_SHA:8}"
+    when:
+      event: push
+      branch: master
+    
+  # helm-chartmuseum:
+  #   image: quay.io/honestbee/drone-chartmuseum
+  #   repo_url: http://chartmuseum.easysunday.com
+  #   chart_path: charts/client
+  #   when:
+  #     branch: master
+    
+  deliver-preview:
+    image: plugins/docker
+    repo: veekungx/client
+    secrets: [docker_username,docker_password]
+    tags:
+      - preview
+      - "preview-${DRONE_COMMIT_SHA:8}"
+
+    when:
+      event: pull_request
+      
+  helm-deploy-preview:
+    image: quay.io/ipedrazas/drone-helm
+    skip_tls_verify: true
+    helm_repos: sunday=http://chartmuseum.easysunday.com
+    chart: sunday/preview
+    wait: true
+    release: ${DRONE_REPO_NAME}-${DRONE_BRANCH/\//-}
+    recreate_pods: true
+    # service_account: tiller
+    secrets: [api_server, kubernetes_token]
+    namespace: thi
+    debug: true
+    when:
+      event: pull_request
+      branch: 
+        exclude: master
+
+  # helm-deploy-staging:
+  #   image: quay.io/ipedrazas/drone-helm
+  #   skip_tls_verify: true
+  #   chart: ./charts/client
+  #   release: 'thi-client'
+  #   wait: true
+  #   recreate_pods: true
+  #   service_account: tiller
+  #   secrets: [api_server, kubernetes_token]
+  #   namespace: thi
+  #   debug: true
+  #   when:
+  #     branch: master
+    
