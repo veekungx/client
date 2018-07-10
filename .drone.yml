@@ -45,9 +45,9 @@ pipeline:
     image: appropriate/curl
     commands: 
       - curl https://api.github.com/repos/veekungx/client/issues/1/comments \
-      -   --data '{ "body":"hello world" }' \
-      -   --header "Authorization:token 17b580c36bd2d1b52572309ab7e823c512f15fad" \
-      -   --header "Content-Type:application/json"
+          --data '{ "body":"hello world" }' \
+          --header "Authorization:token 17b580c36bd2d1b52572309ab7e823c512f15fad" \
+          --header "Content-Type:application/json"
 
 
   # helm-deploy-staging:
