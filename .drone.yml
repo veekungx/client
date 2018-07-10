@@ -1,14 +1,14 @@
 pipeline:
-  push-to-docker:
-    image: plugins/docker
-    repo: veekungx/client
-    secrets: [docker_username,docker_password]
-    tags:
-      - latest
-      - "dev-${DRONE_COMMIT_SHA:0:8}"
-    when:
-      event: push
-      branch: master
+  # push-to-docker:
+  #   image: plugins/docker
+  #   repo: veekungx/client
+  #   secrets: [docker_username,docker_password]
+  #   tags:
+  #     - latest
+  #     - "dev-${DRONE_COMMIT_SHA:0:8}"
+  #   when:
+  #     event: push
+  #     branch: master
     
   # helm-chartmuseum:
   #   image: quay.io/honestbee/drone-chartmuseum
@@ -17,41 +17,38 @@ pipeline:
   #   when:
   #     branch: master
     
-  deliver-preview:
-    image: plugins/docker
-    repo: veekungx/client
-    secrets: [docker_username,docker_password]
-    tags:
-      - preview
-      - "preview-${DRONE_COMMIT_SHA:0:8}"
-    when:
-      event: pull_request
+  # deliver-preview:
+  #   image: plugins/docker
+  #   repo: veekungx/client
+  #   secrets: [docker_username,docker_password]
+  #   tags:
+  #     - preview
+  #     - "preview-${DRONE_COMMIT_SHA:0:8}"
+  #   when:
+  #     event: pull_request
       
-  helm-deploy-preview:
-    image: quay.io/ipedrazas/drone-helm
-    skip_tls_verify: true
-    helm_repos: sunday=http://chartmuseum.easysunday.com
-    chart: sunday/preview
-    wait: true
-    release: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
-    # recreate_pods: true
-    # service_account: tiller
-    values: client.image.tag=preview
-    secrets: [api_server, kubernetes_token]
-    namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
-    debug: true
-    when:
-      event: pull_request
-      # branch: 
-      #   exclude: master
+  # helm-deploy-preview:
+  #   image: quay.io/ipedrazas/drone-helm
+  #   skip_tls_verify: true
+  #   helm_repos: sunday=http://chartmuseum.easysunday.com
+  #   chart: sunday/preview
+  #   wait: true
+  #   release: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
+  #   values: client.image.tag=preview
+  #   secrets: [api_server, kubernetes_token]
+  #   namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
+  #   debug: true
+  #   when:
+  #     event: pull_request
   
   post-github:
     image: appropriate/curl
     commands: 
       - curl https://api.github.com/repos/veekungx/client/issues/1/comments \
-          --data '{ "body":"hello world" }' \
-          --header "Authorization:token 17b580c36bd2d1b52572309ab7e823c512f15fad" \
-          --header "Content-Type:application/json"
+      -   --data '{ "body":"hello world" }' \
+      -   --header "Authorization:token 17b580c36bd2d1b52572309ab7e823c512f15fad" \
+      -   --header "Content-Type:application/json"
+
 
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
