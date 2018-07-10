@@ -57,6 +57,7 @@ pipeline:
     debug: true
     when:
       event: pull_request
+  
       # branch: master
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
