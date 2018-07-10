@@ -40,14 +40,11 @@ pipeline:
   #   debug: true
   #   when:
   #     event: pull_request
-  
+
   post-github:
     image: appropriate/curl
     commands: 
-      - curl https://api.github.com/repos/veekungx/client/issues/1/comments \
-          --data '{ "body":"hello world" }' \
-          --header "Authorization:token 17b580c36bd2d1b52572309ab7e823c512f15fad" \
-          --header "Content-Type:application/json"
+      - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization:token 6f9ee8f74d275e92c4659fa134e0a651ea1169d7" --header "Content-Type:application/json"
 
 
   # helm-deploy-staging:
