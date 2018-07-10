@@ -50,10 +50,10 @@ pipeline:
       }
     debug: true
     skip_verify: true
-    headers:
-      - "Authorization: token 4b951b42e5b91fc3944cc10f8debae9265f25ad7"
+    # headers:
+    #   - "Authorization: token 4b951b42e5b91fc3944cc10f8debae9265f25ad7"
     when:
-      event: pull_request
+      events: pull_request
       branch: master
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
