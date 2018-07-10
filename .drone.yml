@@ -56,7 +56,7 @@ pipeline:
     # to: 1593250210
     to: Ud3e4687761326fd347f0ff27b3eef1fa
     channel_secret: 7d60dec31fe9a1276aef36918186d4c2
-    channel_token: dhaWiVAvzozsid7Icr0PSIZmRIGQfA1GnizW09mJJvMobmCB5rt
+    channel_token: "dhaWiVAvzozsid7Icr0PSIZmRIGQfA1GnizW09mJJvMobmCB5rt+1356WmCldc77ZGHtfRZnIEXk+rhEm/fUvw0rJLS6Mup23AL6cSvyTAqHuPNyCWKEmSPksoUDh2WPDV5hB48C4cv3ineda9GBOQdB04t89/1O/w1cDnyilFU="
     message: >
       The Message When Drone finished built
     when:
