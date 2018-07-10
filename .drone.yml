@@ -36,6 +36,7 @@ pipeline:
     release: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
     # recreate_pods: true
     # service_account: tiller
+    values: client.image.tag=preview
     secrets: [api_server, kubernetes_token]
     namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
     debug: true
@@ -43,6 +44,11 @@ pipeline:
       event: pull_request
       # branch: 
       #   exclude: master
+  
+  post-github:
+    image: appropriate/curl
+    commands: 
+    
 
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
