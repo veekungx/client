@@ -42,13 +42,13 @@ pipeline:
   #     event: pull_request
 
   post-github:
-    image: node
+    image: ubuntu
     commands: 
-      # - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization: token f7a635718bbc170d3868a36c44a8573e12966dab" --header "Content-Type: application/json"
-      # - curl https://api.github.com/repos/veekungx/client/issues/1/comments --header "Content-Type:application/json" --header "Authorization:token a4c22d96f55f6ca8887639c2ab25db980fad4ae7"
-      - curl --version
+      - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization: token 4c8f310f27f9859cfcbfa68062aa9756a72ff6db" --header "Content-Type:application/json"
+      # - curl --version
     when:
       event: pull_request
+      branch: master
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
