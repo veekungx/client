@@ -46,7 +46,7 @@ pipeline:
     image: plugins/webhook
     pull: true
     urls:
-      - https://api.github.com/repos/veekungx/client/issues/1/comments
+      - https://api.github.com/repos/veekungx/${DRONE_REPO_NAME}/issues/${DRONE_PULL_REQUEST}/comments
     username: veekungx
     secrets:
       - source: github_token
