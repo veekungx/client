@@ -53,7 +53,7 @@ pipeline:
         target: webhook_password
     template: >
       {
-        "body" : "Preview Available at \n ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-client.54.169.212.22.nip.io \n ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-server.54.169.212.22.nip.io"
+        "body" : "Preview Available at \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-client.54.169.212.22.nip.io \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-server.54.169.212.22.nip.io"
       }
     debug: true
     when:
