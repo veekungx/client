@@ -54,7 +54,7 @@ pipeline:
     #   - "Authorization: token 4b951b42e5b91fc3944cc10f8debae9265f25ad7"
     when:
       events: pull_request
-      branch: master
+      # branch: master
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
