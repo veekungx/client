@@ -48,7 +48,6 @@ pipeline:
       # - curl --version
     when:
       event: pull_request
-      branch: master
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
@@ -62,4 +61,5 @@ pipeline:
   #   debug: true
   #   when:
   #     branch: master
-    
+
+branches: master
