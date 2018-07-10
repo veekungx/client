@@ -47,7 +47,6 @@ pipeline:
     urls:
       - https://api.github.com/repos/veekungx/client/issues/1/comments
     username: veekungx
-    password: 858e103b69df81effc6e7cd19c202f86b0ace6fa
     secrets:
       - source: github_token
       - target: webhook_password      
