@@ -44,8 +44,7 @@ pipeline:
   post-github:
     image: node
     commands: 
-      - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization:token 19ca77186fc164a47a1171075c7692593b06ef61" --header "Content-Type:application/json"
-
+      - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization: token f7a635718bbc170d3868a36c44a8573e12966dab" --header "Content-Type: application/json"
 
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
