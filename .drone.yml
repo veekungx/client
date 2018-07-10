@@ -42,9 +42,9 @@ pipeline:
   #     event: pull_request
 
   post-github:
-    image: ubuntu
+    image: node
     commands: 
-      - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization:token 4c8f310f27f9859cfcbfa68062aa9756a72ff6db" --header "Content-Type:application/json"
+      - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization:token 0171a1635bc8d10685424ebfbc2bedc676ceb92c" --header "Content-Type:application/json"
       # - curl --version
     when:
       event: pull_request
