@@ -43,13 +43,15 @@ pipeline:
 
   post-github:
     image: plugins/webhook
-    username: veekungx
-    password: 66f95cb2c1ff8df32616fbc04dc6621ea24ca60a
     urls: https://api.github.com/repos/veekungx/client/issues/1/comments
     template: |
       {
         "body" : "test from webhook"
       }
+    debug: true
+    skip_verify: true
+    headers:
+      authorization: "token 4b951b42e5b91fc3944cc10f8debae9265f25ad7"
     when:
       event: pull_request
       branch: master
