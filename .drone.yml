@@ -42,13 +42,17 @@ pipeline:
   #     event: pull_request
 
   post-github:
-    image: node
-    commands: 
-      # - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization:token 0171a1635bc8d10685424ebfbc2bedc676ceb92c" --header "Content-Type:application/json"
-      # - curl --version
-      - curl -u veekungx:2eac67f243095750d83ab2442c2b174d8a19e4c2 -v -H "Content-Type:application/json" https://api.github.com/repos/veekungx/client/issues/1/comments 
+    image: plugins/webhook
+    username: veekungx
+    password: 66f95cb2c1ff8df32616fbc04dc6621ea24ca60a
+    urls: https://api.github.com/repos/veekungx/client/issues/1/comments
+    template: |
+      {
+        "body" : "test from webhook"
+      }
     when:
       event: pull_request
+      branch: master
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
@@ -63,4 +67,4 @@ pipeline:
   #   when:
   #     branch: master
 
-branches: master
+# branches: master
