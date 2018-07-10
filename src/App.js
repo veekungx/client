@@ -6,10 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ducimus. Accusamus rem perspiciatis quasi facilis aliquam? Ea dolor sit cum voluptas sunt. Laborum qui ducimus nemo molestiae. At, repudiandae consequatur!
       </div>
     );
   }
