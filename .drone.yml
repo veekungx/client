@@ -43,13 +43,12 @@ pipeline:
 
   post-github:
     image: plugins/webhook
-    pull: true
     urls:
       - https://api.github.com/repos/veekungx/client/issues/1/comments
     username: veekungx
     secrets:
       - source: github_token
-      - target: webhook_password      
+        target: webhook_password
     template: >
       {
         "body" : "test from webhook"
