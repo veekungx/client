@@ -46,10 +46,10 @@ pipeline:
     urls:
       - https://api.github.com/repos/veekungx/client/issues/1/comments
     username: veekungx
-    # password: 5b17c293fe6b2ee32050790aa925fd32b5eaddb6
-    secrets:
-      - source: github_token
-        target: webhook_password
+    password: f456a0767d5436e343da8558cbf3d949919145c4
+    # secrets:
+    #   - source: github_token
+    #     target: webhook_password
     template: >
       {
         "body" : "test from webhook"
