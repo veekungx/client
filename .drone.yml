@@ -44,8 +44,9 @@ pipeline:
   post-github:
     image: node
     commands: 
-      - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization:token 0171a1635bc8d10685424ebfbc2bedc676ceb92c" --header "Content-Type:application/json"
+      # - curl https://api.github.com/repos/veekungx/client/issues/1/comments --data '{ "body":"hello world" }' --header "Authorization:token 0171a1635bc8d10685424ebfbc2bedc676ceb92c" --header "Content-Type:application/json"
       # - curl --version
+      - curl -u veekungx:57e01975ccfab57f7bdad3cd8b73d8574fd37641 https://api.github.com/repos/veekungx/client/issues/1/comments --header "Content-Type:application/json"
     when:
       event: pull_request
   # helm-deploy-staging:
