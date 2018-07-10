@@ -1,77 +1,59 @@
 pipeline:
-  push-to-docker:
-    image: plugins/docker
-    repo: veekungx/client
-    secrets: [docker_username,docker_password]
-    tags:
-      - latest
-      - "dev-${DRONE_COMMIT_SHA:0:8}"
-    when:
-      event: push
-      branch: master
-    
-  # helm-chartmuseum:
-  #   image: quay.io/honestbee/drone-chartmuseum
-  #   repo_url: http://chartmuseum.easysunday.com
-  #   chart_path: charts/client
+  # push-to-docker:
+  #   image: plugins/docker
+  #   repo: veekungx/client
+  #   secrets: [docker_username,docker_password]
+  #   tags:
+  #     - latest
+  #     - "dev-${DRONE_COMMIT_SHA:0:8}"
   #   when:
+  #     event: push
   #     branch: master
     
-  deliver-preview:
-    image: plugins/docker
-    repo: veekungx/client
-    secrets: [docker_username,docker_password]
-    tags:
-      - preview
-      - "preview-${DRONE_COMMIT_SHA:0:8}"
-    when:
-      event: pull_request
+  # deliver-preview:
+  #   image: plugins/docker
+  #   repo: veekungx/client
+  #   secrets: [docker_username,docker_password]
+  #   tags:
+  #     - preview
+  #     - "preview-${DRONE_COMMIT_SHA:0:8}"
+  #   when:
+  #     event: pull_request
       
-  helm-deploy-preview:
-    image: quay.io/ipedrazas/drone-helm
-    skip_tls_verify: true
-    helm_repos: sunday=http://chartmuseum.easysunday.com
-    chart: sunday/preview
-    # wait: true
-    release: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
-    values: client.image.tag=preview
-    secrets: [api_server, kubernetes_token]
-    # namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
-    namespace: preview
-    debug: true
-    when:
-      event: pull_request
-
-  post-github:
-    image: plugins/webhook
-    pull: true
-    urls:
-      - https://api.github.com/repos/veekungx/${DRONE_REPO_NAME}/issues/${DRONE_PULL_REQUEST}/comments
-    username: veekungx
-    secrets:
-      - source: github_token
-        target: webhook_password
-    template: >
-      {
-        "body" : "Preview Available at \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-client.54.169.212.22.nip.io \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-server.54.169.212.22.nip.io"
-      }
-    debug: true
-    when:
-      event: pull_request
-  
-      # branch: master
-  # helm-deploy-staging:
+  # helm-deploy-preview:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
-  #   chart: ./charts/client
-  #   release: 'thi-client'
-  #   wait: true
-  #   recreate_pods: true
-  #   service_account: tiller
+  #   helm_repos: sunday=http://chartmuseum.easysunday.com
+  #   chart: sunday/preview
+  #   release: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
+  #   values: client.image.tag=preview
   #   secrets: [api_server, kubernetes_token]
-  #   namespace: thi
+  #   # namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
+  #   namespace: preview
   #   debug: true
   #   when:
-  #     branch: master
+  #     event: pull_request
 
-# branches: master
+  # post-github:
+  #   image: plugins/webhook
+  #   pull: true
+  #   urls:
+  #     - https://api.github.com/repos/veekungx/${DRONE_REPO_NAME}/issues/${DRONE_PULL_REQUEST}/comments
+  #   username: veekungx
+  #   secrets:
+  #     - source: github_token
+  #       target: webhook_password
+  #   template: >
+  #     {
+  #       "body" : "Preview Available at \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-client.54.169.212.22.nip.io \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-server.54.169.212.22.nip.io"
+  #     }
+  #   debug: true
+  #   when:
+  #     event: pull_request
+  
+  line:
+    image: appleboy/drone-line
+    channel_secret: 7d60dec31fe9a1276aef36918186d4c2
+    channel_token: dhaWiVAvzozsid7Icr0PSIZmRIGQfA1GnizW09mJJvMobmCB5rt
+    message: >
+      The Message When Drone finished built
