@@ -53,7 +53,13 @@ pipeline:
   
   line:
     image: appleboy/drone-line
+    # to: 1593250210
+    to: Ud3e4687761326fd347f0ff27b3eef1fa
     channel_secret: 7d60dec31fe9a1276aef36918186d4c2
     channel_token: dhaWiVAvzozsid7Icr0PSIZmRIGQfA1GnizW09mJJvMobmCB5rt
     message: >
       The Message When Drone finished built
+    when:
+      event: pull_request
+      branch: master
+    
