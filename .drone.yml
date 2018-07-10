@@ -33,17 +33,32 @@ pipeline:
     helm_repos: sunday=http://chartmuseum.easysunday.com
     chart: sunday/preview
     wait: true
-    release: ${DRONE_REPO_NAME}-${DRONE_BRANCH/\//-}
-    recreate_pods: true
-    # service_account: tiller
+    release: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
+    values: client.image.tag=preview
     secrets: [api_server, kubernetes_token]
-    namespace: thi
+    namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
     debug: true
     when:
       event: pull_request
-      branch: 
-        exclude: master
 
+  post-github:
+    image: plugins/webhook
+    pull: true
+    urls:
+      - https://api.github.com/repos/veekungx/client/issues/1/comments
+    username: veekungx
+    secrets:
+      - source: github_token
+        target: webhook_password
+    template: >
+      {
+        "body" : "Preview Available at \n ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-client.54.169.212.22.nip.io \n ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-server.54.169.212.22.nip.io"
+      }
+    debug: true
+    when:
+      event: pull_request
+  
+      # branch: master
   # helm-deploy-staging:
   #   image: quay.io/ipedrazas/drone-helm
   #   skip_tls_verify: true
@@ -57,4 +72,5 @@ pipeline:
   #   debug: true
   #   when:
   #     branch: master
-    
+
+# branches: master
