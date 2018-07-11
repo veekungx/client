@@ -10,13 +10,6 @@ pipeline:
       event: push
       branch: master
     
-  # helm-chartmuseum:
-  #   image: quay.io/honestbee/drone-chartmuseum
-  #   repo_url: http://chartmuseum.easysunday.com
-  #   chart_path: charts/client
-  #   when:
-  #     branch: master
-    
   deliver-preview:
     image: plugins/docker
     repo: veekungx/client
@@ -32,11 +25,11 @@ pipeline:
     skip_tls_verify: true
     helm_repos: sunday=http://chartmuseum.easysunday.com
     chart: sunday/preview
-    wait: true
     release: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
     values: client.image.tag=preview
     secrets: [api_server, kubernetes_token]
-    namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
+    # namespace: ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}
+    namespace: preview
     debug: true
     when:
       event: pull_request
@@ -45,32 +38,27 @@ pipeline:
     image: plugins/webhook
     pull: true
     urls:
-      - https://api.github.com/repos/veekungx/client/issues/1/comments
+      - https://api.github.com/repos/veekungx/${DRONE_REPO_NAME}/issues/${DRONE_PULL_REQUEST}/comments
     username: veekungx
     secrets:
       - source: github_token
         target: webhook_password
     template: >
       {
-        "body" : "Preview Available at \n ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-client.54.169.212.22.nip.io \n ${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-server.54.169.212.22.nip.io"
+        "body" : "Preview Available at \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-client.54.169.212.22.nip.io \n http://${DRONE_REPO_NAME}-${DRONE_PULL_REQUEST}-preview-server.54.169.212.22.nip.io"
       }
     debug: true
     when:
       event: pull_request
   
-      # branch: master
-  # helm-deploy-staging:
-  #   image: quay.io/ipedrazas/drone-helm
-  #   skip_tls_verify: true
-  #   chart: ./charts/client
-  #   release: 'thi-client'
-  #   wait: true
-  #   recreate_pods: true
-  #   service_account: tiller
-  #   secrets: [api_server, kubernetes_token]
-  #   namespace: thi
-  #   debug: true
-  #   when:
-  #     branch: master
-
-# branches: master
+  line:
+    image: appleboy/drone-line
+    to: Ud3e4687761326fd347f0ff27b3eef1fa
+    channel_secret: 7d60dec31fe9a1276aef36918186d4c2
+    channel_token: "dhaWiVAvzozsid7Icr0PSIZmRIGQfA1GnizW09mJJvMobmCB5rt+1356WmCldc77ZGHtfRZnIEXk+rhEm/fUvw0rJLS6Mup23AL6cSvyTAqHuPNyCWKEmSPksoUDh2WPDV5hB48C4cv3ineda9GBOQdB04t89/1O/w1cDnyilFU="
+    message: >
+      The Message When Drone finished built
+    when:
+      event: pull_request
+      branch: master
+    

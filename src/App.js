@@ -6,7 +6,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Delectus, ducimus. Accusamus rem perspiciatis quasi facilis aliquam? Ea dolor sit cum voluptas sunt. Laborum qui ducimus nemo molestiae. At, repudiandae consequatur!
+        Why we do client?
       </div>
     );
   }
