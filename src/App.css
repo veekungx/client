@@ -1,28 +1,30 @@
 .App {
-  text-align: center;
+  padding: 50px;
+  margin: auto;
+  max-width: 420px;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.App ul{
+  list-style: none;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
+.App ul li{
+  padding: 4px 0;
+  font-size: 28px;
+  font-family: Sukhumvit Set;
+}
+
+.InputTodo{
+  padding: 3px;
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.AddTodoButton{
+  background: teal;
   color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
 }
