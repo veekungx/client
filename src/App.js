@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider, Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import "./App.css";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_SERVER_ENDPOINT
@@ -36,8 +37,8 @@ const AddTodo = ({ onAddTodo }) => {
             input.value = '';
             onAddTodo();
           }}>
-            <input ref={node => { input = node; }} />
-            <button type="submit">Add Todo</button>
+            <input className="InputTodo" ref={node => { input = node; }} />
+            <button className="AddTodoButton" type="submit">Add Todo</button>
           </form>
         </div>
       )}
@@ -48,7 +49,7 @@ class App extends Component {
   render() {
     return (
       <ApolloProvider client={client}>
-        <div>
+        <div className="App">
           <Query query={query}>
             {({ loading, error, data, refetch }) => {
               if (loading) return <p>Loading...</p>
