@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import ApolloClient from 'apollo-boost';
 import { ApolloProvider, Query, Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
-import "./App.css";
 
 const client = new ApolloClient({
   uri: process.env.REACT_APP_SERVER_ENDPOINT
